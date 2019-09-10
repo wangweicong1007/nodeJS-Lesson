@@ -4,11 +4,15 @@ const fs = require("fs"); //文件操作的模块
 const url = require("url");
 const path = require("path");
 
-//2.创建一个服务器
+//2.创建一个服务器,只要有http请求，访问端口
+//就会执行回调函数里面的内容
 var sever = http.createServer(function(req, res) {
+    //req.url表示url地址中，端口以后的内容
+    //使用了url.parse 将req.url转化为了对象，对象提取pathname
+    //
     var urlObj = url.parse(req.url);
     var urlPathName = urlObj.pathname;
-
+    //根据资源路径，可以决定执行那一段代码
     console.log(urlPathName);
     if (urlPathName == "/favicon.ico") {
         res.end();
@@ -28,7 +32,7 @@ var sever = http.createServer(function(req, res) {
         res.writeHead(200, { "Content-Type": "text/javascript" });
         res.write(jsContent);
         res.end();
-        console.log(jsContent);
+        // console.log(jsContent);
     }
 });
 //3.服务器监听一个端口

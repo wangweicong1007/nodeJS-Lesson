@@ -212,6 +212,26 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
-   
+   $.get('/listData',(data)=>{
+       var listdata=JSON.parse(data);
+       listdata.forEach((data,index)=>{
+           var list=`<tr>
+                        <td>
+                            ${data.chapterId}
+                        </td>
+                        <td>
+                            ${data.chapterName}
+                        </td>
+                        <td>
+                            ${data.views}
+                        </td>
+                        <td>
+                            <button>删除</button>
+                        </td>
+            </tr>
+           `;
+           $("#result").append(list);
+       });
+   })
 </script>
 </html>
